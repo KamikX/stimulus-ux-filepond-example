@@ -1,0 +1,56 @@
+<div{{ attributes }}>
+
+    {# Switches #}
+
+    {#  file-pond or empty  #}
+    {% set myController = 'file-pond' %}
+    {#  hidden or empty  #}
+    {% set fileHiddenClass = 'hidden' %}
+    {#  true or false  #}
+    {% set submitViaLiveAction = true %}
+
+
+
+    {% if submitViaLiveAction %}
+    {# Submitting via a LiveAction #}
+    {{ form_start(form, {
+        attr: {
+            'data-action': 'live#action:prevent',
+            'data-live-action-param': 'files|save',
+            'novalidate': 'novalidate',
+            'data-controller': myController,
+            'class': 'max-w-sm mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 my-4'
+        }
+    }) }}
+    {% else %}
+        {#Submitting with a normal controller#}
+        {{ form_start(form, {
+            attr: {
+                'novalidate': 'novalidate',
+                'data-controller': myController,
+                'class': 'max-w-sm mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 my-4'
+            }
+        }) }}
+    {% endif %}
+
+    {# Name #}
+    <div class="mb-5">
+        {{ form_label(form.name, 'Name',{ 'label_attr' : { 'class': 'block mb-2 text-sm font-medium text-gray-900' } }) }}
+        {{ form_widget(form.name, { 'attr' : { 'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"' } }) }}
+    </div>
+
+    {# File #}
+    <div class="mb-5">
+        {{ form_label(form.file, 'File',{ 'label_attr' : { 'class': 'block mb-2 text-sm font-medium text-gray-900' } }) }}
+        {{ form_widget(form.file, { 'attr' : { 'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 '~fileHiddenClass } }) }}
+    </div>
+
+
+    <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+        Submit
+    </button>
+
+
+    {{ form_end(form) }}
+</div>

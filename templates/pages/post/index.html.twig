@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+
+
+    <div class="container mx-auto">
+
+        <div class="flex justify-center">
+            <h1 class="text-3xl font-bold underline my-4">
+                UX Live Component (Forms) + stimulus filepond controller
+            </h1>
+        </div>
+
+        <div class="w-full justify-center">
+
+            <twig:PostForm :form="form" :initialFormData="post"/>
+
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
