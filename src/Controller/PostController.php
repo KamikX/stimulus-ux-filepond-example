@@ -20,9 +20,14 @@ class PostController extends AbstractController
 
         /**
          * 1. LiveComponent + custom stimulus controller (file-pond) + submitting with a normal controller
-         *    - Working with duplicate "file" field on rerender, edge case: "If JavaScript removes an element that was originally rendered by the component, that change will be lost: the element will be re-added during the next re-render."
-         *    - Workaround hide originally rendered field via file-pond controller
+         *    - working with duplicate "file" field on rerender, edge case: "If JavaScript removes an element that was originally rendered by the component, that change will be lost: the element will be re-added during the next re-render."
+         *    - workaround hide originally rendered field
+         *    - UploadedFile available via form data or request->files
          * 2. LiveComponent + custom stimulus controller (file-pond) + submitting via a LiveAction =>
+         *    - working with duplicate "file" field on rerender, edge case: "If JavaScript removes an element that was originally rendered by the component, that change will be lost: the element will be re-added during the next re-render."
+         *    - workaround hide originally rendered field
+         *    - UploadedFile not available via form data or request->files
+         *    - without file-pond controller UploadedFile available via $request->files
          * */
 
         $post = new PostDTO();

@@ -29,8 +29,7 @@ export default class extends Controller {
 
             this.fp.on("init", (event) => {
                 console.log("FilePond:init")
-
-                // (1) workaround hide originally rendered field via file-pond controller when filepond is initialized
+                // workaround hide originally rendered field via class in twig, classes are cloned to new filepond element, must be removed when filepond is initialized
                 this.fp.element.classList.remove('hidden')
 
             });
@@ -38,12 +37,32 @@ export default class extends Controller {
 
             // 'addfile' instead of 'FilePond:addfile'
             this.fp.on('addfile', (error, file) => {
-                if (error) {
-                    console.log('Oh no');
-                    return;
-                }
 
-                console.log('File added', file.getFileEncodeDataURL());
+
+                // Experiment with ID (not working)
+                // id = post_form_file
+                // name = post_form[file]
+
+                //<input type="file" id="post_form_file" name="post_form[file]" required="required" data-file-pond-target="input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                //<input type="file" name="post_form[file]" id="post_form_file">
+                // const fileInputs = this.element.parentElement.querySelectorAll("form input[type='file']");
+                //
+                // let fieldId = null;
+                // fileInputs.forEach(fileInput => {
+                //     if (fileInput.hasAttribute('data-file-pond-target')) {
+                //         fieldId = fileInput.id
+                //         fileInput.remove()
+                //     }
+                //
+                //     if (!fileInput.hasAttribute('id')) {
+                //         fileInput.setAttribute('id', fieldId);
+                //     }
+                //
+                // })
+
+
+                console.log(this.element.parentElement.querySelectorAll("form input[type='file']"));
+
             })
 
         }
